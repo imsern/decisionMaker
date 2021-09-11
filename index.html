@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestemme seg Stian</title>
+    <style>
+
+
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script>
+//hjelpe variabler
+const app = document.getElementById('app');
+//model
+let valgMuligheter = [];
+let inputValue;
+let chosenWord = '';
+
+//view
+show();
+function show(){
+    let html = `<h1>"Stian's decide this shit for me" - Page!</h1>
+                <input type="text" oninput="inputValue = this.value" onchange="addChoice()">
+                <button onclick="addChoice()">add</button><button onclick="removeLast()">remove last</button><br />
+                <button onclick="randomizeWord()">Make my choise!</button><br />
+                <button onclick="resetPage()">reset</button>
+                <h1>${chosenWord}</h1>`;
+    for (i = 0; i < valgMuligheter.length; i++){
+        let mineValg = valgMuligheter[i];
+        
+        html += `<ul> <li>${mineValg}</li> </ul>`;
+    }
+    app.innerHTML = html;
+}
+//controller
+function addChoice(){
+    let newItem = inputValue;
+    valgMuligheter.push(newItem);
+    show();
+}
+function randomizeWord(){
+    let randomizeValue = Math.floor(Math.random() * valgMuligheter.length)
+    chosenWord = valgMuligheter[randomizeValue];
+    show();
+}
+
+function removeLast(){
+    valgMuligheter.pop();
+    show();
+}
+
+function resetPage(){
+    window.location.reload();
+}
+
+
+    </script>
+</body>
+</html>
